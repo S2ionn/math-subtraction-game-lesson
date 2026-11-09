@@ -922,12 +922,12 @@ function wheelSVG(O,labels){
   s+='</g><circle class="whub" cx="250" cy="250" r="30"/><polygon class="wst" points="'+st.join(' ')+'"/>'+cabs+'<rect class="wpf" x="186" y="552" width="128" height="10" rx="4"/>';
   if(O||labels){const mx=592,my=444,mr=70,N=9;
     s+='<line class="wl" style="stroke:#8ec5f2" x1="'+mx+'" y1="'+my+'" x2="'+(mx-34)+'" y2="556"/><line class="wl" style="stroke:#f4a6c0" x1="'+mx+'" y1="'+my+'" x2="'+(mx+34)+'" y2="556"/><rect class="wb" style="fill:#a8dd7f" x="'+(mx-48)+'" y="552" width="40" height="14" rx="4"/><rect class="wb" style="fill:#ffd36e" x="'+(mx+8)+'" y="552" width="40" height="14" rx="4"/>';
-    s+='<circle class="wr" style="stroke:url(#'+gid+')" cx="'+mx+'" cy="'+my+'" r="'+mr+'"/><circle class="whub" cx="'+mx+'" cy="'+my+'" r="9"/>';
+    s+='<g class="rotm" data-mx="'+mx+'" data-my="'+my+'"><circle class="wr" style="stroke:url(#'+gid+')" cx="'+mx+'" cy="'+my+'" r="'+mr+'"/>';
     const pos=j=>{const a=(-90+j*360/N)*Math.PI/180;return [Math.round(mx+mr*Math.cos(a)),Math.round(my+mr*Math.sin(a))];};
-    for(let j=0;j<N;j++){const p=pos(j);s+='<line class="ws" style="stroke:'+SPK[j%5]+'" x1="'+mx+'" y1="'+my+'" x2="'+p[0]+'" y2="'+p[1]+'"/>';}
+    for(let j=0;j<N;j++){const p=pos(j);s+='<line class="ws" style="stroke:'+SPK[j%5]+'" x1="'+mx+'" y1="'+my+'" x2="'+p[0]+'" y2="'+p[1]+'"/>';}s+='</g><circle class="whub" cx="'+mx+'" cy="'+my+'" r="9"/>';
     for(let j=0;j<N;j++){const p=pos(j),x=p[0],y=p[1];
-      if(j<O) s+='<g class="qp"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff" stroke="#8b6b5c" stroke-width="3.2"/><image href="'+KID_IMG[j]+'" x="'+(x-15)+'" y="'+(y+7)+'" width="30" height="34"/></g>';
-      else s+='<g class="qe"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff8ef" stroke="#d9c4b4" stroke-width="3.2" stroke-dasharray="4 3"/></g>';}
+      if(j<O) s+='<g class="qp mc" data-bx="'+x+'" data-by="'+y+'"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff" stroke="#8b6b5c" stroke-width="3.2"/><image href="'+KID_IMG[j]+'" x="'+(x-15)+'" y="'+(y+7)+'" width="30" height="34"/></g>';
+      else s+='<g class="qe mc" data-bx="'+x+'" data-by="'+y+'"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff8ef" stroke="#d9c4b4" stroke-width="3.2" stroke-dasharray="4 3"/></g>';}
   }
   if(labels){s+='<text class="wt t" x="16" y="56">큰 관람차 10칸</text><text class="wt2 t" x="16" y="88">10묶음</text>';if(O)s+='<text class="wt o" x="470" y="326">꼬마 관람차 9칸</text><text class="wt2 o" x="470" y="358">낱개 '+O+'명</text>';}
   return s+'</svg>';
@@ -1007,9 +1007,12 @@ document.querySelectorAll('.wpic').forEach(p=>{
 });
 document.querySelectorAll('.kd').forEach(e=>e.style.backgroundImage='url('+KID_IMG[+e.dataset.k]+')');
 document.querySelectorAll('.model').forEach(buildModel);
+function miniSpin(sv,A){const gm=sv.querySelector('.rotm');if(!gm)return;const mx=+gm.dataset.mx,my=+gm.dataset.my,M=A*1.6,r=M*Math.PI/180,co=Math.cos(r),si=Math.sin(r);
+  gm.setAttribute('transform','rotate('+M.toFixed(2)+' '+mx+' '+my+')');
+  sv.querySelectorAll('.mc').forEach(c=>{const bx=+c.dataset.bx,by=+c.dataset.by,dx=bx-mx,dy=by-my;c.setAttribute('transform','translate('+(mx+dx*co-dy*si-bx).toFixed(1)+' '+(my+dx*si+dy*co-by).toFixed(1)+')');});}
 (function(){let A=0,last=0;function spin(t){const dt=last?Math.min(t-last,100):0;last=t;A=(A+dt*0.009)%360;const r=A*Math.PI/180,co=Math.cos(r),si=Math.sin(r);
 document.querySelectorAll('.slide.on svg.wh:not(.fd)').forEach(sv=>{const g=sv.querySelector('.rotg');if(g)g.setAttribute('transform','rotate('+A.toFixed(2)+' 250 250)');
-sv.querySelectorAll('.cab').forEach(c=>{const bx=+c.dataset.bx,by=+c.dataset.by,dx=bx-250,dy=by-250;c.setAttribute('transform','translate('+(250+dx*co-dy*si-bx).toFixed(1)+' '+(250+dx*si+dy*co-by).toFixed(1)+')');});});
+sv.querySelectorAll('.cab').forEach(c=>{const bx=+c.dataset.bx,by=+c.dataset.by,dx=bx-250,dy=by-250;c.setAttribute('transform','translate('+(250+dx*co-dy*si-bx).toFixed(1)+' '+(250+dx*si+dy*co-by).toFixed(1)+')');});miniSpin(sv,A);});
 requestAnimationFrame(spin);}requestAnimationFrame(spin);})();
 
 (function(){
