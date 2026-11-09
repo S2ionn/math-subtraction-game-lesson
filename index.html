@@ -626,6 +626,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .g3 .car ~ .sc .sec div.hi{background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 144 80'><path d='M6 18a12 12 0 0 1 24 0v4h84v-4a12 12 0 0 1 24 0v42q0 14-14 14H20Q6 74 6 60Z' fill='%23ffd6c0' stroke='%23f0a688' stroke-width='3' stroke-linejoin='round'/><path d='M30 24v30q0 8 8 8h68q8 0 8-8V24' fill='none' stroke='%23f0a688' stroke-width='2.5' stroke-linecap='round' opacity='.7'/></svg>");color:#4a3428}
 .car ~ .board,.board{border:3px solid #ecd2c4!important;background:#fff4ec!important;border-radius:16px;color:#8b6b5c!important}
 .car:before,.car:after{background:repeating-linear-gradient(to bottom,#dcebfa 0 48px,transparent 48px 66px)!important;border-radius:6px}
+.n-map .st.past::after{content:"";position:absolute;right:-16px;top:-46px;width:78px;height:78px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'><rect x='4' y='4' width='64' height='64' rx='16' fill='%23fff7f8' stroke='%23e5737f' stroke-width='3.5'/><rect x='11' y='22' width='24' height='17' rx='4' fill='none' stroke='%23e5737f' stroke-width='3'/><rect x='38' y='27' width='19' height='12' rx='3' fill='none' stroke='%23e5737f' stroke-width='3'/><rect x='41' y='20' width='6' height='7' fill='%23e5737f'/><circle cx='19' cy='43' r='3.6' fill='none' stroke='%23e5737f' stroke-width='2.6'/><circle cx='30' cy='43' r='3.6' fill='none' stroke='%23e5737f' stroke-width='2.6'/><circle cx='45' cy='43' r='3.6' fill='none' stroke='%23e5737f' stroke-width='2.6'/><circle cx='54' cy='43' r='3.6' fill='none' stroke='%23e5737f' stroke-width='2.6'/><text x='36' y='62' text-anchor='middle' font-family='Malgun Gothic,sans-serif' font-size='13' font-weight='700' fill='%23e5737f'>통과</text></svg>") center/contain no-repeat;transform:rotate(12deg);transition:transform .35s cubic-bezier(.3,1.7,.5,1),opacity .2s;pointer-events:none}
+.n-map .st.past.new::after{opacity:0;transform:rotate(12deg) scale(2.2)}
+.n-map .st.past b:after{content:none!important}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><symbol id="seatS" viewBox="0 0 70 64"><path d="M4 8A5 5 0 0 1 14 8V14H56V8A5 5 0 0 1 66 8V48Q66 60 54 60H16Q4 60 4 48Z"/><path fill="none" d="M14 14V44Q14 52 22 52H48Q56 52 56 44V14"/></symbol></svg>
@@ -1021,8 +1024,10 @@ fit();enter(slides[cur],false);show(cur);
     var x=parseFloat(tr.style.left)||0;
     var d=idx>0?(x-parseFloat(sts[idx-1].style.left)):(x+150);
     var was=false,tm=0;
+    var pst=idx>0?sts[idx-1]:null;
     function run(){
       clearTimeout(tm);
+      if(pst) pst.classList.add('new');
       tr.style.transition='none';
       tr.style.transform='translateX(-'+d+'px)';
       void tr.offsetWidth;
@@ -1030,13 +1035,13 @@ fit();enter(slides[cur],false);show(cur);
         tr.style.transition='transform 1.8s ease-in-out';
         tr.style.transform='none';
         try{chooChoo();}catch(e){}
-        tm=setTimeout(function(){try{stopChoo();}catch(e){}},1900);
+        tm=setTimeout(function(){try{stopChoo();}catch(e){}if(pst) pst.classList.remove('new');},1900);
       },350);
     }
     new MutationObserver(function(){
       var on=sl.classList.contains('on');
       if(on&&!was) run();
-      if(!on&&was){clearTimeout(tm);tr.style.transition='none';tr.style.transform='none';try{stopChoo();}catch(e){}}
+      if(!on&&was){clearTimeout(tm);if(pst) pst.classList.remove('new');tr.style.transition='none';tr.style.transform='none';try{stopChoo();}catch(e){}}
       was=on;
     }).observe(sl,{attributes:true,attributeFilter:['class']});
     if(sl.classList.contains('on')){was=true;run();}
