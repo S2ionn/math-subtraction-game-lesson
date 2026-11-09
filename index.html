@@ -478,7 +478,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .model .m-tree{top:354px}
 .model .m-aisle span{visibility:hidden}
 .model .m-blk.one .seat:not(.full){visibility:hidden}
-.model.wheel svg.wh{position:absolute;left:0;top:-4px;width:690px;height:591px}
+.model.wheel svg.wh{position:absolute;left:12px;top:14px;width:668px;height:573px}
 .wh .wg{stroke:#cfcfcf;stroke-width:4}
 .wh .wl{stroke:#f6a9c7;stroke-width:20;stroke-linecap:round}
 .wh .wd{fill:#fff}
@@ -518,7 +518,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .m-meth{white-space:nowrap}
 .model .m-foot .m-meth .mb{font:inherit;font-size:24px;font-weight:700;line-height:1.2;padding:3px 12px;margin:0 4px;vertical-align:top;border:3px solid var(--line);background:#fff;border-radius:10px;color:var(--txt);cursor:pointer}
 .model.q{top:84px}
-.model.q svg.wh{top:0;height:566px;width:662px}
+.model.q svg.wh{top:0;height:534px;width:622px}
 .model.q .m-eq{top:0;font-size:84px;gap:8px 18px}
 .model.q .m-eq .op{font-size:76px}
 .model.q .m-eq .ans{min-width:120px;height:106px}
@@ -819,7 +819,7 @@ function wheelSVG(O,labels){
   for(let i=0;i<10;i++){
     const t=(90+i*36)*Math.PI/180,x=Math.round(cx+R*Math.cos(t)),y=Math.round(cy+R*Math.sin(t)),c=P[i%5];
     s+='<line class="ws" x1="250" y1="250" x2="'+x+'" y2="'+y+'"/>';
-    cabs+='<g class="cab" data-bx="'+x+'" data-by="'+y+'"><g transform="translate('+x+' '+y+') scale(1.5) translate('+(-x)+' '+(-y)+')"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+10)+'"/><path class="rf" d="M'+(x-12)+' '+(y+17)+'Q'+x+' '+(y+5)+' '+(x+12)+' '+(y+17)+'Z" fill="'+c[0]+'"/>'
+    cabs+='<g class="cab" data-bx="'+x+'" data-by="'+y+'"><g transform="translate('+x+' '+y+') scale(1.4) translate('+(-x)+' '+(-y)+')"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+10)+'"/><path class="rf" d="M'+(x-12)+' '+(y+17)+'Q'+x+' '+(y+5)+' '+(x+12)+' '+(y+17)+'Z" fill="'+c[0]+'"/>'
       +'<rect class="win" x="'+(x-30)+'" y="'+(y+15)+'" width="60" height="58" rx="27"/>'
       +'<g class="kid"><image href="'+KID_IMG[i%8]+'" x="'+(x-23)+'" y="'+(y+16)+'" width="46" height="53"/></g>'
       +'<path class="bd" d="M'+(x-29)+' '+(y+57)+'H'+(x+29)+'Q'+(x+28)+' '+(y+73)+' '+x+' '+(y+73)+'Q'+(x-28)+' '+(y+73)+' '+(x-29)+' '+(y+57)+'Z" fill="'+c[0]+'"/>'
