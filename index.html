@@ -711,7 +711,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .q3-n span{font-size:30px!important}
 
 .model.q.stp .m-eq{font-size:70px;gap:4px 16px}
-.model.q.stp .m-foot{top:182px;gap:206px}
+.model.q.stp .m-foot{top:182px;gap:178px}
 .model.q.stp .m-tree{top:232px}
 .model.q .m-steps{top:376px;gap:24px;flex-direction:row}
 .m-steps .ms{display:flex!important;align-items:center;gap:10px;white-space:nowrap}
@@ -749,6 +749,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .q3-eqs{gap:22px!important}
 .q3-eqs .ln{font-size:42px!important;gap:10px!important}
 .q3-eqs .ln i{width:36px!important;height:36px!important;font-size:22px!important}
+.m-foot .boxes i.pk{width:44px;height:52px;border:0;background:none;border-radius:0;display:flex;align-items:flex-end;justify-content:center;padding:0}
+.m-foot .boxes i.pk img{width:100%;height:100%;object-fit:contain;opacity:.22;filter:grayscale(1)}
+.m-foot .boxes i.pk.f img{opacity:1;filter:none}
+.m-foot .boxes i.pk.nw{animation:none}
+.m-foot .boxes{gap:2px!important}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><symbol id="seatS" viewBox="0 0 70 64"><path d="M4 8A5 5 0 0 1 14 8V14H56V8A5 5 0 0 1 66 8V48Q66 60 54 60H16Q4 60 4 48Z"/><path fill="none" d="M14 14V44Q14 52 22 52H48Q56 52 56 44V14"/></symbol></svg>
@@ -959,7 +964,7 @@ function buildWheel(el){
   if(!hasN){wheelState(svg,[],[]);sl._st={n:0,render(){}};attachPick(el);return;}
   let cab,qs,gone;
   function tree(m){const v=m==='B'?[B,O,B-O,'o','t']:[A,10,O,'t','o'];q('.m-tree .tp').textContent=v[0];const c1=q('.m-tree .c1'),c2=q('.m-tree .c2');c1.textContent=v[1];c2.textContent=v[2];c1.className='c1 '+v[3];c2.className='c2 '+v[4];}
-  function boxes(){q('.boxes').innerHTML=Array.from({length:B},(_,i)=>'<i class="'+(i<gone?'f':'')+'">'+(i+1)+'</i>').join('');}
+  function boxes(){q('.boxes').innerHTML=Array.from({length:B},(_,i)=>'<i class="pk'+(i<gone?' f':'')+'"><img src="'+(food?FOOD_IMG[i%FOOD_IMG.length]:KID_IMG[i%KID_IMG.length])+'" alt=""></i>').join('');}
   function draw(){wheelState(svg,cab,qs);boxes();}
   function reset(){el._free=false;el.classList.remove('rem');cab=Array(10).fill('f');qs=Array(O).fill('f');gone=0;q('.m-steps').innerHTML='';el.classList.remove('stp');q('.ans').textContent='';q('.m-meth').innerHTML=B>O?'<button class="mb nonav" data-k="1">낱개 먼저 빼기</button><button class="mb nonav" data-k="5">10에서 빼기</button>':'';tree('A');draw();}
   function showS(m,n){const R=B-O,r=A-B,L=m==='o'?[A+' - '+O+' = 10','10 - '+R+' = '+r]:['10 - '+B+' = '+(10-B),(10-B)+' + '+O+' = '+r];
