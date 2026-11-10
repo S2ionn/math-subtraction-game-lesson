@@ -756,6 +756,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .m-foot .boxes{gap:2px!important}
 .n-card.tk .tkq b{white-space:nowrap;font-size:44px}
 .n-card.tk .tkm b{white-space:nowrap}
+.wh:not(.fd) .wt{font-size:50px!important}
+.model.wheel{top:0!important}
+.model.wheel svg.wh{left:0!important;top:0!important;width:702px!important;height:606px!important}
+.model.wheel .m-eq{left:706px!important;right:12px!important;top:4px!important;font-size:108px!important;gap:6px 16px!important}
+.model.wheel .m-eq .op{font-size:96px!important}
+.model.wheel .m-eq .ans{min-width:130px!important;height:118px!important}
+.model.wheel .m-foot{left:706px!important;right:12px!important;top:268px!important;gap:176px!important}
+.model.wheel .m-tree{left:706px!important;right:12px!important;top:322px!important}
+.model.wheel .m-steps{left:706px!important;right:12px!important;top:456px!important}
+.model.wheel.stp .m-eq{font-size:96px!important}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><symbol id="seatS" viewBox="0 0 70 64"><path d="M4 8A5 5 0 0 1 14 8V14H56V8A5 5 0 0 1 66 8V48Q66 60 54 60H16Q4 60 4 48Z"/><path fill="none" d="M14 14V44Q14 52 22 52H48Q56 52 56 44V14"/></symbol></svg>
@@ -933,7 +943,7 @@ function wheelSVG(O,labels){
       if(j<O) s+='<g class="qp mc" data-bx="'+x+'" data-by="'+y+'"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff" stroke="#8b6b5c" stroke-width="3.2"/><image href="'+KID_IMG[j]+'" x="'+(x-15)+'" y="'+(y+7)+'" width="30" height="34"/></g>';
       else s+='<g class="qe mc" data-bx="'+x+'" data-by="'+y+'"><line class="hg" x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+7)+'"/><circle cx="'+x+'" cy="'+(y+24)+'" r="18" fill="#fff8ef" stroke="#d9c4b4" stroke-width="3.2" stroke-dasharray="4 3"/></g>';}
   }
-  if(labels){s+='<text class="wt t" x="16" y="56">큰 관람차 10칸</text><text class="wt2 t" x="16" y="88">10묶음</text>';if(O)s+='<text class="wt o" x="470" y="326">꼬마 관람차 9칸</text><text class="wt2 o" x="470" y="358">낱개 '+O+'명</text>';}
+  if(labels){s+='<text class="wt t" x="16" y="62">10묶음</text>';if(O)s+='<text class="wt o" x="488" y="338">낱개 '+O+'명</text>';}
   return s+'</svg>';
 }
 function riceBall(cx,cy,cls){return '<g class="'+cls+'"><path class="rb" d="M'+cx+' '+(cy-34)+'Q'+(cx+7)+' '+(cy-36)+' '+(cx+11)+' '+(cy-28)+'L'+(cx+33)+' '+(cy+16)+'Q'+(cx+36)+' '+(cy+26)+' '+(cx+25)+' '+(cy+26)+'L'+(cx-25)+' '+(cy+26)+'Q'+(cx-36)+' '+(cy+26)+' '+(cx-33)+' '+(cy+16)+'L'+(cx-11)+' '+(cy-28)+'Q'+(cx-7)+' '+(cy-36)+' '+cx+' '+(cy-34)+'Z"/><rect class="nr" x="'+(cx-14)+'" y="'+(cy+2)+'" width="28" height="24" rx="3"/></g>';}
@@ -948,7 +958,7 @@ function foodSVG(O,labels){
     s+='<g class="cab" data-cx="'+cx+'" data-cy="'+cy+'"><rect class="cl" x="'+x+'" y="'+y+'" width="90" height="108" rx="14"/><g class="rbg">'+foodIcon(i,cx,cy)+'</g><g class="mv"></g>'+eaten(cx,cy)+'</g>';
   }
   for(let j=0;j<O;j++){const cx=70+j*80;s+='<g class="qp"><ellipse class="pl" cx="'+cx+'" cy="500" rx="37" ry="13"/>'+'<g class="rbg">'+foodIcon(10+j,cx,462)+'</g>'+eaten(cx,470)+'</g>';}
-  if(labels){s+='<text class="wt t" x="30" y="44">쟁반 한 판 10개</text><text class="wt2 t" x="300" y="44">10묶음</text>';if(O)s+='<text class="wt o" x="30" y="404">접시에 따로 '+O+'개</text><text class="wt2 o" x="300" y="404">낱개</text>';}
+  if(labels){s+='<text class="wt t" x="30" y="48" style="font-size:50px">10묶음</text>';if(O)s+='<text class="wt o" x="30" y="408" style="font-size:50px">낱개 '+O+'개</text>';}
   return s+'</svg>';
 }
 function wheelState(svg,cab,q){
