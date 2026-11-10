@@ -770,6 +770,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .model.wheel .m-eq .op{font-size:108px!important}
 .model.wheel .m-eq .ans{min-width:140px!important;height:128px!important}
 .model.wheel.stp .m-eq{font-size:108px!important}
+.model.wheel .m-steps{flex-direction:row!important;gap:18px!important;top:452px!important}
+.model.wheel .m-steps .ms b{font-size:32px!important}
+.model.wheel .m-foot{gap:196px!important}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><symbol id="seatS" viewBox="0 0 70 64"><path d="M4 8A5 5 0 0 1 14 8V14H56V8A5 5 0 0 1 66 8V48Q66 60 54 60H16Q4 60 4 48Z"/><path fill="none" d="M14 14V44Q14 52 22 52H48Q56 52 56 44V14"/></symbol></svg>
@@ -963,7 +966,7 @@ function foodSVG(O,labels){
     s+='<g class="cab" data-cx="'+cx+'" data-cy="'+cy+'"><rect class="cl" x="'+x+'" y="'+y+'" width="122" height="148" rx="18"/><g class="rbg">'+foodIcon(i,cx,cy,100)+'</g><g class="mv"></g>'+sc(cx,cy,1.35,eaten(cx,cy))+'</g>';
   }
   for(let j=0;j<O;j++){const cx=56+j*82;s+='<g class="qp"><ellipse class="pl" cx="'+cx+'" cy="550" rx="40" ry="14"/>'+'<g class="rbg">'+foodIcon(10+j,cx,508,84)+'</g>'+sc(cx,516,1.2,eaten(cx,516))+'</g>';}
-  if(labels){s+='<text class="wt t" x="14" y="56" style="font-size:50px">10묶음</text>';if(O)s+='<text class="wt o" x="14" y="458" style="font-size:50px">낱개 '+O+'개</text>';}
+  if(labels){s+='<text class="wt t" x="14" y="56" style="font-size:50px">10묶음</text>';if(O)s+='<text class="wt o" x="14" y="458" style="font-size:44px">낱개 '+O+'개</text>';}
   return s+'</svg>';
 }
 function wheelState(svg,cab,q){
